@@ -1,9 +1,9 @@
 <?php
 
-namespace FCCommonUnitTest\View\Helper;
+namespace Zf2CommonUnitTest\View\Helper;
 
 use Zend\Stdlib\Exception\InvalidArgumentException;
-use FCCommon\View\Helper\TrimUrl;
+use Zf2Common\View\Helper\TrimUrl;
 
 class TrimUrlTest extends \PHPUnit_Framework_TestCase {
 

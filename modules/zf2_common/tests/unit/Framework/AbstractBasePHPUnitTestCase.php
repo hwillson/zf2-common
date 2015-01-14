@@ -1,6 +1,6 @@
 <?php
 
-namespace FCCommonUnitTest\Framework;
+namespace Zf2CommonUnitTest\Framework;
 
 use PHPUnit_Framework_TestCase;
 

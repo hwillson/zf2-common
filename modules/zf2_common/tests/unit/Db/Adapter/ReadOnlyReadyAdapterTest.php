@@ -1,11 +1,11 @@
 <?php
 
-namespace FCCommonUnitTest\Db\Adapter;
+namespace Zf2CommonUnitTest\Db\Adapter;
 
 use PHPUnit_Framework_TestCase as TestCase;
 use Zend\Db\Adapter\Driver\StatementInterface;
 use Zend\Db\ResultSet\ResultSet;
-use FCCommon\Db\Adapter\ReadOnlyReadyAdapter;
+use Zf2Common\Db\Adapter\ReadOnlyReadyAdapter;
 
 class ReadOnlyReadyAdapterTest extends TestCase {
 

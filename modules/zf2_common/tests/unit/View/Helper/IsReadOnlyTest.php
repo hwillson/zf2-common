@@ -1,9 +1,9 @@
 <?php
 
-namespace FCCommonUnitTest\View\Helper;
+namespace Zf2CommonUnitTest\View\Helper;
 
 use PHPUnit_Framework_TestCase as TestCase;
-use FCCommon\View\Helper\IsReadOnly;
+use Zf2Common\View\Helper\IsReadOnly;
 
 class IsReadOnlyTest extends TestCase {
 

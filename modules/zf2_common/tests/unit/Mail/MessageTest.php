@@ -1,8 +1,8 @@
 <?php
 
-namespace FCCommonUnitTest\Mail;
+namespace Zf2CommonUnitTest\Mail;
 
-use FCCommon\Mail\Message;
+use Zf2Common\Mail\Message;
 
 class MessageTest extends \PHPUnit_Framework_TestCase {
 
@@ -14,8 +14,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase {
       $sendGridHeader, 'Custom SendGrid header should not exist.');
   }
 
-  public function testConstruct_FdoCategory_AddSendGridCategoryHeader() {
-    $message = new Message('fdo');
+  public function testConstruct_Category_AddSendGridCategoryHeader() {
+    $message = new Message('test_category');
     $headers = $message->getHeaders();
     $sendGridHeader = $headers->get('X-SMTPAPI');
     $this->assertNotNull(
@@ -24,8 +24,8 @@ class MessageTest extends \PHPUnit_Framework_TestCase {
       'X-SMTPAPI', $sendGridHeader->getFieldName(),
       'SendGrid category should be set.');
     $this->assertEquals(
-      '{"category": "fdo"}', $sendGridHeader->getFieldValue(),
-      'fdo category should be set.');
+      '{"category": "test_category"}', $sendGridHeader->getFieldValue(),
+      'test_category category should be set.');
   }
 
 }

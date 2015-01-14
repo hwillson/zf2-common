@@ -1,6 +1,6 @@
 <?php
 
-namespace FCCommon\Db\TableGateway;
+namespace Zf2Common\Db\TableGateway;
 
 use Zend\Db\TableGateway\TableGateway;
 use Zend\Db\Sql\Insert;

@@ -42,11 +42,11 @@ class Module implements AutoloaderProviderInterface {
         }
       ),
       'factories' => array(
-        'FCCommon\I18n\Translator\Loader\DatabaseTranslationLoader' =>
+        'Zf2Common\I18n\Translator\Loader\DatabaseTranslationLoader' =>
           function($serviceManager) {
             $dbAdapter = $serviceManager->get('Zend\Db\Adapter\Adapter');
             return
-              new \FCCommon\I18n\Translator\Loader\DatabaseTranslationLoader(
+              new \Zf2Common\I18n\Translator\Loader\DatabaseTranslationLoader(
                 $dbAdapter);
         }
       )
