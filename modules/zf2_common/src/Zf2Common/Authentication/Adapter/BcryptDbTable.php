@@ -18,11 +18,26 @@ use Zend\Db\Sql\Predicate\Operator as SqlOp;
 use Zend\Crypt\Password\Bcrypt;
 use Zend\Stdlib\Exception\RuntimeException;
 
+/**
+ * A Bcrypt DbTable authentication adapter, used to bcrypt entered passwords,
+ * comparing with stored bcrypted passwords.
+ *
+ * @package  Zf2Common
+ */
 class BcryptDbTable extends DbTable {
 
+  /** Flag to disable bcrypt check. */
   protected $disableBcrypt;
+
+  /** Unencrypted password table column. */
   protected $unencryptedCredentialColumn;
 
+  /**
+   * Creates a Zend\Db\Sql\Select object that is completely configured to be
+   * queried against the database.
+   *
+   * @return  Sql\Select  Select object.
+   */
   protected function authenticateCreateSelect() {
     if ($this->getDisableBcrypt()) {
       return parent::authenticateCreateSelect();
@@ -35,6 +50,13 @@ class BcryptDbTable extends DbTable {
     }
   }
 
+  /**
+   * Will bcrypt and compare the passed in credential against a previously
+   * stored bcrypted credential
+   *
+   * @param   $dbSelect  Select object.
+   * @return  array  Result identities.
+   */
   protected function authenticateQuerySelect(Select $dbSelect) {
 
     if ($this->getDisableBcrypt()) {
@@ -95,18 +117,39 @@ class BcryptDbTable extends DbTable {
 
   }
 
+  /**
+   * Set $disableBcrypt.
+   *
+   * @param  boolean  $disableBcrypt  Enable/disable bcrypt.
+   */
   public function setDisableBcrypt($disableBcrypt) {
     $this->disableBcrypt = $disableBcrypt;
   }
 
+  /**
+   * Get $disableBcrypt.
+   *
+   * @return  boolean  True if enabled, false if disabled.
+   */
   public function getDisableBcrypt() {
     return $this->disableBcrypt;
   }
 
+  /**
+   * Set $unencryptedCredentialColumn.
+   *
+   * @param  string  $unencryptedCredentialColumn  Unencrypted credential
+   *         column name.
+   */
   public function setUnencryptedCredentialColumn($unencryptedCredentialColumn) {
     $this->unencryptedCredentialColumn = $unencryptedCredentialColumn;
   }
 
+  /**
+   * Get $unencryptedCredentialColumn.
+   *
+   * @return  string  Unencrypted credential column name.
+   */
   public function getUnencryptedCredentialColumn() {
     return $this->unencryptedCredentialColumn;
   }
