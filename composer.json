@@ -1,0 +1,8 @@
+{
+  "name": "zf2_common",
+  "description": "ZF2 Common Library",
+  "require": {
+    "php": ">=5.3.3",
+    "zendframework/zendframework": ">2.1.3",
+  }
+}

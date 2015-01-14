@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="zf2_common" default="test" basedir=".">
+
+  <property name="testDir"
+    value="${project.basedir}/modules/zf2_common/tests" />
+
+  <target name="test" description="Run unit/integration tests with PHPUnit">
+    <exec command="phpunit -c ${testDir}/phpunit.xml"
+      logoutput="/dev/stdout"/>
+  </target>
+
+  <target name="ut" description="Run unit tests with PHPUnit">
+    <exec command='phpunit -c ${testDir}/phpunit.xml --testsuite "zf2_common_unit"'
+      logoutput="/dev/stdout"/>
+  </target>
+
+  <target name="it" description="Run integration tests with PHPUnit">
+    <exec command='phpunit -c ${testDir}/phpunit.xml --testsuite "zf2_common_integration"'
+      logoutput="/dev/stdout"/>
+  </target>
+
+</project>
+
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit bootstrap="Bootstrap.php">
+
+  <testsuites>
+    <testsuite name="zf2_common_unit">
+      <directory>unit</directory>
+    </testsuite>
+    <testsuite name="zf2_common_integration">
+      <directory>integration</directory>
+    </testsuite>
+  </testsuites>
+
+</phpunit>
