@@ -17,6 +17,8 @@ use Zend\Mail\Header\GenericHeader;
 /**
  * Mail message class used to add custom functionality to the default
  * ZF2 Message class.
+ *
+ * @package  Zf2Common
  */
 class Message extends MailMessage {
 

@@ -15,6 +15,11 @@ use Zend\Permissions\Acl\Acl as ZendAcl;
 use Zend\Permissions\Acl\Role\GenericRole;
 use Zend\Permissions\Acl\Resource\GenericResource;
 
+/**
+ * Access control list implementation handling roles and resource access.
+ *
+ * @package  Zf2Common
+ */
 class Acl extends ZendAcl {
 
   const GUEST_ROLE = 'guest';

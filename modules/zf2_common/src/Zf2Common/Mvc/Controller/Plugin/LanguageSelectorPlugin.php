@@ -19,14 +19,21 @@ use Zf2Common\I18n\Language;
 
 /**
  * Custom plugin used to extract language selection from the request, setting
- * the appropriate locale and translate object.  If no language is specified
+ * the appropriate locale and translate object. If no language is specified
  * in the request, will fallback on the locale of the users browser.
+ *
+ * @package  Zf2Common
  */
 class LanguageSelectorPlugin extends AbstractPlugin
     implements LoggerAwareInterface {
 
+  /** Logger. */
   protected $logger;
+
+  /** Session container. */
   protected $session;
+
+  /** Default language. */
   protected $defaultLanguage;
 
   /**
@@ -34,7 +41,7 @@ class LanguageSelectorPlugin extends AbstractPlugin
    * parameter setting in the request - fallback on browser locale if no
    * language request parameter is present.
    *
-   * @param  MvcEvent  $mvcEvent
+   * @param  MvcEvent  $mvcEvent  Event.
    */
   public function setLanguage($event) {
 
@@ -56,22 +63,47 @@ class LanguageSelectorPlugin extends AbstractPlugin
 
   }
 
+  /**
+   * Get $logger.
+   *
+   * @return  LoggerInterface  $logger.
+   */
   public function getLogger() {
     return $this->logger;
   }
 
+  /**
+   * Set $logger.
+   *
+   * @param  LoggerInterface  $logger  Logger.
+   */
   public function setLogger(LoggerInterface $logger) {
     $this->logger = $logger;
   }
 
+  /**
+   * Get $session.
+   *
+   * @return  Session  $session.
+   */
   public function getSession() {
     return $this->session;
   }
 
+  /**
+   * Set $session.
+   *
+   * @param  Session  $session  Session.
+   */
   public function setSession(Session $session) {
     $this->session = $session;
   }
 
+  /**
+   * Get $defaultLanguage.
+   *
+   * @return  string  $defaultLanguage, falling back on English if not set.
+   */
   public function getDefaultLanguage() {
     $defaultLanguage = $this->defaultLanguage;
     if (empty($defaultLanguage)) {
@@ -80,6 +112,11 @@ class LanguageSelectorPlugin extends AbstractPlugin
     return $defaultLanguage;
   }
 
+  /**
+   * Set $defaultLanguage.
+   *
+   * @param  string  $defaultLanguage  Default language.
+   */
   public function setDefaultLanguage($defaultLanguage) {
     $this->defaultLanguage = $defaultLanguage;
   }
