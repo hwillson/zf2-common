@@ -17,6 +17,8 @@ use Zf2Common\View\Helper\AbstractBaseHelper;
 
 /**
  * Get the current URL, replacing keys/values as needed in the request string.
+ *
+ * @package  Zf2Common
  */
 class GetUrl extends AbstractBaseHelper {
 
@@ -26,15 +28,16 @@ class GetUrl extends AbstractBaseHelper {
   /**
    * Build and return a URL replacing request keys/values as needed.
    *
-   * @param   $controller     Controller.
-   * @param   $action         Action.
-   * @param   $queryParams    Query parameters.
-   * @param   $replaceParams  Query parameters/values to replace.
-   * @return  string          Built URL.
+   * @param   string  $controller  Controller.
+   * @param   string  $action  Action.
+   * @param   array  $queryParams  Query parameters.
+   * @param   array  $replaceParams  Query parameters/values to replace.
+   * @return  string  Built URL.
    */
   public function __invoke(
       $controller, $action, array $queryParams = null,
       array $replaceParams = null) {
+
     $url = null;
   	$urlHelper = $this->getUrlHelper();
   	if ($urlHelper != null) {
@@ -60,7 +63,9 @@ class GetUrl extends AbstractBaseHelper {
       $url = preg_replace('/%5B(\d+)%5D/', '%5B%5D', $url);
 
     }
+
     return $url;
+
   }
 
   /**
@@ -75,7 +80,7 @@ class GetUrl extends AbstractBaseHelper {
   /**
    * Set the URL view helper.
    *
-   * @param  $urlHelper  URL view helper.
+   * @param  UrlHelper  $urlHelper  URL view helper.
    */
   public function setUrlHelper(UrlHelper $urlHelper) {
     $this->urlHelper = $urlHelper;

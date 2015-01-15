@@ -22,13 +22,26 @@ use Zend\Permissions\Acl\Resource\GenericResource;
  */
 class Acl extends ZendAcl {
 
+  /** Guest role. */
   const GUEST_ROLE = 'guest';
+
+  /** Default role. */
   const DEFAULT_ROLE = self::GUEST_ROLE;
+
+  /** Member role. */
   const MEMBER_ROLE = 'member';
+
+  /** Admin role. */
   const ADMIN_ROLE = 'admin';
 
+  /** Role IDs. */
   protected $roleIds = array();
 
+  /**
+   * Default constructor.
+   *
+   * @param  array  $config  Config.
+   */
   public function __construct($config)  {
     if (!isset($config['acl']['roles'])
         || !isset($config['acl']['resources'])) {
@@ -42,17 +55,32 @@ class Acl extends ZendAcl {
     $this->setRoleIds($config['acl']['role_ids']);
   }
 
+  /**
+   * Get $roleIds;
+   *
+   * @return  array  $roleIds.
+   */
   public function getRoleIds() {
     return $this->roleIds;
   }
 
+  /**
+   * Set $roleIds.
+   *
+   * @param  array  $roleIds  Role IDs.
+   */
   public function setRoleIds($roleIds) {
     $this->roleIds = $roleIds;
   }
 
+  /**
+   * Add roles.
+   *
+   * @param   array  $roles  Roles.
+   * @return  Acl  This Acl object, for chaining.
+   */
   protected function addRoles($roles) {
     foreach ($roles as $name => $parent) {
-
       if (!$this->hasRole($name)) {
         if (empty($parent)) {
           $parent = array();
@@ -65,11 +93,16 @@ class Acl extends ZendAcl {
         }
         $this->addRole(new GenericRole($name), $parent);
       }
-
     }
     return $this;
   }
 
+  /**
+   * Add resources.
+   *
+   * @param   array  $resources  Resources.
+   * @return  Acl  This Acl object, for chaining.
+   */
   protected function addResources($resources) {
     foreach ($resources as $permission => $controllers) {
       foreach ($controllers as $controller => $actions) {

@@ -16,6 +16,8 @@ use Zend\View\Helper\AbstractHelper;
 
 /**
  * Trim a URL for display.
+ *
+ * @package  Zf2Common
  */
 class TrimUrl extends AbstractHelper {
 
@@ -23,9 +25,9 @@ class TrimUrl extends AbstractHelper {
    * Trim a URL for display up to the specified size, removing any http/https
    * scheme identifiers. Will suffix with "...".
    *
-   * @param  string  $url  URL.
-   * @param  int  $size  Trim up to this size.
-   * @retur  string  Trimmer URL.
+   * @param   string  $url  URL.
+   * @param   int  $size  Trim up to this size.
+   * @return  string  Trimmed URL.
    */
   public function __invoke($url, $size) {
 

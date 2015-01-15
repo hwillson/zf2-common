@@ -17,14 +17,16 @@ use Zf2Common\View\Helper\AbstractBaseHelper;
 
 /**
  * Return an array with all existing requests parameters, URL encoded.
+ *
+ * @package  Zf2Common
  */
 class UrlEncodedRequestParams extends AbstractBaseHelper {
 
   /**
    * Return an array with all existing requests parameters, URL encoded.
    *
-   * @param   $request  HTTP request.
-   * @return  array     HTTP request parameters.
+   * @param   Request  $request  HTTP request.
+   * @return  array  HTTP request parameters.
    */
   public function __invoke($request) {
 

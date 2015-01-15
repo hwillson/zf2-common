@@ -34,61 +34,6 @@ class UserSessionMapper extends AbstractTable {
   private $sortOrder;
 
   /**
-   * Find active sessions for a username.
-   *
-   * @param   $username  Username.
-   * @return  array    UserSession array.
-   */
-  public function findByUsername($username) {
-    $dbAdapter = $this->getTableGateway()->getAdapter();
-    $rows = $this->getTableGateway()->select(array('username' => $username));
-    $userSessions = null;
-    foreach ($rows as $row) {
-      if ($userSessions === null) $userSessions = array();
-      $row = $row->toArray();
-      $modified = $row['modified'];
-      $lifetime = $row['lifetime'];
-      if (($modified + $lifetime) >= time()) {
-        $userSession = new UserSession();
-        $userSession->setSessionId($row['session_id']);
-        $userSession->setSessionName($row['session_name']);
-        $userSession->setModified($modified);
-        $userSession->setLifetime($lifetime);
-        $userSession->setSessionData($row['session_data']);
-        $userSession->setUsername($row['username']);
-        $userSession->setNamedUserId($row['named_user_id']);
-        $userSessions[] = $userSession;
-      }
-    }
-    return $userSessions;
-  }
-
-  /**
-   * Get the most recently modified session record by username.
-   *
-   * @param   string     $username  Username to find session for.
-   * @param   int      $namedUserId optional named user id
-   * @return  UserSession  Most recent session.
-   */
-  public function findMostRecentSessionByUsername(
-      $username, $namedUserId = null) {
-    $resultSet =
-      $this->getTableGateway()->select(
-        function(Select $select) use ($username, $namedUserId) {
-          if ($namedUserId)
-            $select->where(array('named_user_id' => $namedUserId));
-          $select->where(array('username' => $username));
-          $select->order('modified DESC');
-        });
-    $session = null;
-    if ($resultSet->count()) {
-      $session = $resultSet->current();
-    }
-    $resultSet = null;
-    return $session;
-  }
-
-  /**
    * Find a user session by session ID.
    *
    * @param   string  $sessionId  User session ID.
@@ -106,11 +51,11 @@ class UserSessionMapper extends AbstractTable {
   }
 
   /**
-   * Load an array of session details.  Will return a Paginator object.
+   * Load an array of session details. Will return a Paginator object.
    *
    * @param   $filterKeyValues  Column name/value pair (separated by "::")
-   *              array used to refine search
-   * @return  Paginator     Zend paginator object
+   *          array used to refine search
+   * @return  Paginator  Zend paginator object
    */
   public function fetchAll_Paginator($filterKeyValues = null) {
 
@@ -193,7 +138,7 @@ class UserSessionMapper extends AbstractTable {
   /**
    * Remove a session.
    *
-   * @param  $sessionId  Session ID for session to remove
+   * @param  string  $sessionId  Session ID for session to remove
    */
   public function removeSession($sessionId) {
     if (!empty($sessionId)) {
@@ -218,20 +163,11 @@ class UserSessionMapper extends AbstractTable {
   }
 
   /**
-   * Remove sessions by username.
-   *
-   * @param  string  $username  Remove sessions for this username.
-   */
-  public function removeByUsername($username) {
-    $this->getTableGateway()->delete(array('username' => $username));
-  }
-
-  /**
-   * Remove all sessions.  If filter values are provided, use these to
+   * Remove all sessions. If filter values are provided, use these to
    * restrict the records removed.
    *
    * @param  $filterKeyValues  Filter values used to restrict the records
-   *               removed
+   *                           removed.
    */
   public function removeAllSessions($filterKeyValues = null) {
     $where = array();
@@ -272,7 +208,7 @@ class UserSessionMapper extends AbstractTable {
   }
 
   /**
-   * Create a new UserSession entry in the database.  This is handled
+   * Create a new UserSession entry in the database. This is handled
    * automatically by ZF2, but this method can be used for integration testing.
    *
    * @param  UserSession  $userSession  User session to save.
@@ -283,9 +219,7 @@ class UserSessionMapper extends AbstractTable {
       'session_name' => $userSession->getSessionName(),
       'modified' => $userSession->getModified(),
       'lifetime' => $userSession->getLifetime(),
-      'session_data' => $userSession->getSessionData(),
-      'username' => $userSession->getUsername(),
-      'named_user_id' => $userSession->getNamedUserId()
+      'session_data' => $userSession->getSessionData()
     );
     $this->getTableGateway()->insert($data);
   }
@@ -293,7 +227,7 @@ class UserSessionMapper extends AbstractTable {
   /**
    * Add default sort column and order to select.
    *
-   * @param  $select  Select statement
+   * @param  Select  $select  Select statement.
    */
   protected function addDefaultSortToSelect(&$select) {
     $sortByColumn = $this->getSortByColumn();
@@ -303,18 +237,38 @@ class UserSessionMapper extends AbstractTable {
     }
   }
 
+  /**
+   * Get $sortByColumn.
+   *
+   * @return  string  $sortByColumn.
+   */
   public function getSortByColumn() {
     return $this->sortByColumn;
   }
 
+  /**
+   * Set $sortByColumn.
+   *
+   * @param  string  $sortByColumn.
+   */
   public function setSortByColumn($sortByColumn) {
     $this->sortByColumn = $sortByColumn;
   }
 
+  /**
+   * Get $sortOrder.
+   *
+   * @return  string  $sortOrder.
+   */
   public function getSortOrder() {
     return $this->sortOrder;
   }
 
+  /**
+   * Set $sortOrder.
+   *
+   * @param  string  $sortOrder.
+   */
   public function setSortOrder($sortOrder) {
     $this->sortOrder = $sortOrder;
   }

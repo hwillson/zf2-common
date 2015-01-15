@@ -18,9 +18,17 @@ use Zend\View\Helper\AbstractHelper;
  * achieved in newer versions of PHP, using the NumberFormatter class and
  * NumberFormatter::ORDINAL.  Unfortunately the resulting ordinal characters
  * are not serializable, and can't be stored in the session properly.
+ *
+ * @package  Zf2Common
  */
 class Ordinal extends AbstractHelper {
 
+  /**
+   * Return the ordinal representation of the passed in number, when invoked.
+   *
+   * @param   int  $num  Number to show as ordinal.
+   * @return  string  Ordinal number representation.
+   */
   public function __invoke($num) {
     if ( ($num / 10) % 10 != 1 ) {
       switch( $num % 10 ) {
