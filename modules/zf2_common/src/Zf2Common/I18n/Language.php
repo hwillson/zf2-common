@@ -13,6 +13,8 @@ namespace Zf2Common\I18n;
 
 /**
  * Application language helper class.
+ *
+ * @package  Zf2Common
  */
 class Language {
 
@@ -31,8 +33,8 @@ class Language {
   /**
    * Get a language descriptive english label.
    *
-   * @param   $language  Language to get English label for
-   * @return  string   Language full name
+   * @param   string  $language  Language to get English label for.
+   * @return  string  Language full name.
    */
   public static function getLanguageFullName($language) {
     $fullName = null;
@@ -47,8 +49,8 @@ class Language {
   /**
    * Return a full language name based on the passed in locale.
    *
-   * @param   $locale  Locale
-   * @return  string   Full language name
+   * @param   string  $locale  Locale string.
+   * @return  string  Full language name.
    */
   public static function getLanguageFullNameForLocale($locale) {
     $fullName = null;

@@ -18,29 +18,57 @@ use Zend\Log\LoggerAwareInterface;
 /**
  * TableGateway based parent table class.
  *
- * @module Zf2Common
+ * @package  Zf2Common
  */
 abstract class AbstractTable implements LoggerAwareInterface {
 
+  /** Table gateway. */
   protected $tableGateway;
+
+  /** Logger. */
   protected $logger;
 
+  /**
+   * Default constructor.
+   *
+   * @param  TableGateway  $tableGateway  Table gateway.
+   */
   public function __construct(TableGateway $tableGateway) {
     $this->tableGateway = $tableGateway;
   }
 
+  /**
+   * Get $tableGateway.
+   *
+   * @return  TableGateway  $tableGateway.
+   */
   public function getTableGateway() {
     return $this->tableGateway;
   }
 
+  /**
+   * Set $tableGateway.
+   *
+   * @param  TableGateway  $tableGateway  Table gateway.
+   */
   public function setTableGateway(TableGateway $tableGateway) {
     $this->tableGateway = $tableGateway;
   }
 
+  /**
+   * Get $logger.
+   *
+   * @return  LoggerInterface  $logger.
+   */
   public function getLogger() {
     return $this->logger;
   }
 
+  /**
+   * Set $logger.
+   *
+   * @param  LoggerInterface  $logger  Logger.
+   */
   public function setLogger(LoggerInterface $logger) {
     $this->logger = $logger;
   }

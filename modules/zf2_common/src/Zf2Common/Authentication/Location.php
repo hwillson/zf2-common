@@ -11,6 +11,11 @@
 
 namespace Zf2Common\Authentication;
 
+/**
+ * Request location helper.
+ *
+ * @package  Zf2Common
+ */
 class Location {
 
   /**

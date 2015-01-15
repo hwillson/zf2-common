@@ -36,7 +36,7 @@ class BcryptDbTable extends DbTable {
    * Creates a Zend\Db\Sql\Select object that is completely configured to be
    * queried against the database.
    *
-   * @return  Sql\Select  Select object.
+   * @return  Zend\Db\Sql\Select  Select object.
    */
   protected function authenticateCreateSelect() {
     if ($this->getDisableBcrypt()) {
@@ -54,7 +54,7 @@ class BcryptDbTable extends DbTable {
    * Will bcrypt and compare the passed in credential against a previously
    * stored bcrypted credential
    *
-   * @param   $dbSelect  Select object.
+   * @param   Zend\Db\Sql\Select $dbSelect  Select object.
    * @return  array  Result identities.
    */
   protected function authenticateQuerySelect(Select $dbSelect) {

@@ -17,11 +17,19 @@ use Zend\Db\Sql\Update;
 use Zend\Db\Sql\Delete;
 
 /**
- * Read only ready TableGateway.  If the adapter is in ready only mode, make
+ * Read only ready TableGateway. If the adapter is in ready only mode, make
  * sure insert, updates and deletes are disabled.
+ *
+ * @package  Zf2Common
  */
 class ReadOnlyReadyTableGateway extends TableGateway {
 
+  /**
+   * If read only mode is enabled, skip the insert, else perform the insert.
+   *
+   * @param   Insert  $insert  Insert SQL.
+   * @return  mixed  Result.
+   */
   protected function executeInsert(Insert $insert) {
     $adapter = $this->getAdapter();
     if (property_exists($adapter, 'readOnly') && $adapter->getReadOnly()) {
@@ -31,6 +39,12 @@ class ReadOnlyReadyTableGateway extends TableGateway {
     }
   }
 
+  /**
+   * If read only mode is enabled, skip the update, else perform the update.
+   *
+   * @param   Update  $update  Update SQL.
+   * @return  mixed  Result.
+   */
   protected function executeUpdate(Update $update) {
     $adapter = $this->getAdapter();
     if (property_exists($adapter, 'readOnly') && $adapter->getReadOnly()) {
@@ -40,6 +54,12 @@ class ReadOnlyReadyTableGateway extends TableGateway {
     }
   }
 
+  /**
+   * If read only mode is enabled, skip the delete, else perform the delete.
+   *
+   * @param   Delete  $delete  Delete SQL.
+   * @return  mixed  Result.
+   */
   protected function executeDelete(Delete $delete) {
     $adapter = $this->getAdapter();
     if (property_exists($adapter, 'readOnly') && $adapter->getReadOnly()) {

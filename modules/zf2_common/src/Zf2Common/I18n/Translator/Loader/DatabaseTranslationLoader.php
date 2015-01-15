@@ -23,42 +23,92 @@ use Zf2Common\I18n\Language;
 
 /**
  * Load translations from database.
+ *
+ * @package  Zf2Common
  */
 class DatabaseTranslationLoader
     implements RemoteLoaderInterface, LoggerAwareInterface {
 
+  /** Database adapter. */
   protected $dbAdapter;
+
+  /** Database schema. */
   protected $dbSchema;
+
+  /** Logger. */
   protected $logger;
 
-  public function setDbAdapter($dbAdapter) {
-    $this->dbAdapter = $dbAdapter;
-  }
-
-  public function getDbAdapter() {
-    return $this->dbAdapter;
-  }
-
-  public function setDbSchema($dbSchema) {
-    $this->dbSchema = $dbSchema;
-  }
-
-  public function getDbSchema() {
-    return $this->dbSchema;
-  }
-
-  public function getLogger() {
-    return $this->logger;
-  }
-
-  public function setLogger(LoggerInterface $logger) {
-    $this->logger = $logger;
-  }
-
+  /**
+   * Default constructor.
+   *
+   * @param  DbAdapter  $dbAdapter  Database adapter.
+   */
   public function __construct(DbAdapter $dbAdapter) {
     $this->dbAdapter = $dbAdapter;
   }
 
+  /**
+   * Set $dbAdapter.
+   *
+   * @param  DbAdapter  $dbAdapter  Database adapter.
+   */
+  public function setDbAdapter($dbAdapter) {
+    $this->dbAdapter = $dbAdapter;
+  }
+
+  /**
+   * Get $dbAdapter.
+   *
+   * @return  DbAdapter  $dbAdapter.
+   */
+  public function getDbAdapter() {
+    return $this->dbAdapter;
+  }
+
+  /**
+   * Set $dbSchema.
+   *
+   * @param  string  $dbSchema  Database schema.
+   */
+  public function setDbSchema($dbSchema) {
+    $this->dbSchema = $dbSchema;
+  }
+
+  /**
+   * Get $dbSchema.
+   *
+   * @return  string  $dbSchema.
+   */
+  public function getDbSchema() {
+    return $this->dbSchema;
+  }
+
+  /**
+   * Get $logger.
+   *
+   * @return  LoggerInterface  $logger.
+   */
+  public function getLogger() {
+    return $this->logger;
+  }
+
+  /**
+   * Set $logger.
+   *
+   * @param  LoggerInterface  $logger  Logger.
+   */
+  public function setLogger(LoggerInterface $logger) {
+    $this->logger = $logger;
+  }
+
+  /**
+   * Load translations from the "app_dictionary" table, storing them in a
+   * Zend\I18n\Translator\TextDomain object.
+   *
+   * @param   string  $locale  Locale string.
+   * @param   TextDomain  $textDomain  Default TextDomain (overwritten).
+   * @return  TextDomain  TextDomain loaded from database.
+   */
   public function load($locale, $textDomain) {
 
     $this->getLogger()->debug("Locale: $locale");
@@ -69,9 +119,9 @@ class DatabaseTranslationLoader
     $select = $sql->select();
     $schema = $this->getDbSchema();
     if (isset($schema))
-      $select->from(new TableIdentifier('mex_dictionary', $schema));
+      $select->from(new TableIdentifier('app_dictionary', $schema));
     else
-      $select->from('mex_dictionary');
+      $select->from('app_dictionary');
     $select->columns(array('code_desc', "$localeColumn"), false);
     $messages =
       $this->dbAdapter->query(

@@ -23,12 +23,22 @@ use Zend\Db\ResultSet\ResultSetInterface as RSInterface;
  * for database adapters.  If found, will make sure update and insert queries
  * are not executed.
  *
- * @module Zf2Common
+ * @package Zf2Common
  */
 class ReadOnlyReadyAdapter extends Adapter {
 
+  /** Is read only mode enabled? */
   protected $readOnly = false;
 
+  /**
+   * Default constructor.
+   *
+   * @param  Driver\DriverInterface|array  $driver
+   * @param  Platform\PlatformInterface  $platform
+   * @param  ResultSet\ResultSetInterface  $queryResultPrototype
+   * @param  Profiler\ProfilerInterface  $profiler
+   * @param  boolean  $readOnly  Is read only mode enabled?
+   */
   public function __construct(
       $driver, PlatformInterface $platform = null,
       ResultSetInterface $queryResultPrototype = null,
@@ -40,6 +50,14 @@ class ReadOnlyReadyAdapter extends Adapter {
 
   }
 
+  /**
+   * If read only mode is enabled and the query is an insert or update, skip
+   * the operation and return an empty result set.
+   *
+   * @param   string  $sql
+   * @param   string|array|ParameterContainer  $parametersOrQueryMode
+   * @return  Driver\StatementInterface|ResultSet\ResultSet
+   */
   public function query(
       $sql, $parametersOrQueryMode = self::QUERY_MODE_PREPARE,
       RSInterface $resultPrototype = null) {
@@ -52,13 +70,22 @@ class ReadOnlyReadyAdapter extends Adapter {
     } else {
       return parent::query($sql, $parametersOrQueryMode);
     }
-
   }
 
+  /**
+   * Set $driver.
+   *
+   * @param  DriverInterface  $driver  Driver interface.
+   */
   public function setDriver(DriverInterface $driver) {
     $this->driver = $driver;
   }
 
+  /**
+   * Get $readOnly.
+   *
+   * @return  boolean  Is read only mode enabled?
+   */
   public function getReadOnly() {
     return $this->readOnly;
   }
